@@ -1,0 +1,30 @@
+.wrapper{
+    background-color: rgb(230, 120, 146);
+    padding: 100px;
+    margin: 0;
+}
+.fruit-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 50px;
+}
+.fruit-inner{
+    width: 170px;
+    height: 200px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.fruit-img{
+    width: 150px;
+    height: 150px;
+}
