@@ -29,3 +29,21 @@
     width: 150px;
     height: 150px;
 }
+
+.wrap{
+    display : flex;
+    align-items: center;
+    gap: 50px;
+    font-size: 30px;
+}
+
+.wrap button{
+    padding: 10px, 20px;
+    font-size: 50px;
+    width: 100px;
+}
+
+.input{
+    padding: 10px 5px;
+    width: 300px;
+}
