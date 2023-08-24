@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import { users } from "./mock";
 import './table.css'
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 
 class Table extends Component{
     constructor(props){
