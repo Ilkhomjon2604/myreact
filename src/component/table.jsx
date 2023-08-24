@@ -14,6 +14,10 @@ class Table extends Component{
             age : '',
             search: 'id',
             active: null,
+            inputName: '',
+            inputJob: '',
+            inputStatus: '',
+            inputAge: '',
         }
     }
     render(){
@@ -49,24 +53,24 @@ class Table extends Component{
          const onOption =(e)=>{  this.setState({search : e.target.value})     }
 
         //  creating element in object 
-         const creatObj = (e)=>{ this.setState({   [e.target.name] : e.target.value }) }
+         const creatObj = (e)=>{ this.setState({  [e.target.name] : e.target.value }) }
 
         //  adding element to the table 
          const onAdd = () =>{
             let newUser = {
                 id : users.length + 1,
-                name : this.state.name,
-                job: this.state.job,
-                status: this.state.status,
-                age : this.state.age
+                name : this.state.inputName,
+                job: this.state.inputJob,
+                status: this.state.inputStatus,
+                age : this.state.inputAge
             }
             if(newUser.name.length && newUser.job.length && newUser.status.length){
                 this.setState({
                     data : [...this.state.data, newUser],
-                    name : '',
-                    job: '',
-                    status: '',
-                    age: ''
+                    inputName : '',
+                    inputJob: '',
+                    inputStatus: '',
+                    inputAge: ''
                 })
             }
          
@@ -156,10 +160,10 @@ class Table extends Component{
             
             <div className="input-wrapper">
 
-                <input value={this.state.name} autoComplete="off" type="text" placeholder="Type in Your name..." name="name" onChange={creatObj}/>
-                <input value={this.state.job} autoComplete="off" type="text" placeholder="Type your occupation..." name="job" onChange={creatObj}/>
-                <input value={this.state.status} autoComplete="off" type="text" placeholder="Type your Status..." name="status" onChange={creatObj}/>
-                <input value={this.state.age} autoComplete="off" type="number" placeholder="What is your age..." name="age" onChange={creatObj}/>
+                <input value={this.state.inputName} autoComplete="off" type="text" placeholder="Type in Your name..." name="inputName" onChange={creatObj}/>
+                <input value={this.state.inputJob} autoComplete="off" type="text" placeholder="Type your occupation..." name="inputJob" onChange={creatObj}/>
+                <input value={this.state.inputStatus} autoComplete="off" type="text" placeholder="Type your Status..." name="inputStatus" onChange={creatObj}/>
+                <input value={this.state.inputAge} autoComplete="off" type="number" placeholder="What is your age..." name="inputAge" onChange={creatObj}/>
                 <button type="submit" onClick={onAdd}>Add</button>
                 
             </div>
