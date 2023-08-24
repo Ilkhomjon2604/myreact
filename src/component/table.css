@@ -35,3 +35,31 @@ tr:nth-child(odd) {background: #f1f1f1}
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
+
+select{
+    padding: 10px;
+}
+
+
+.input-wrapper{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.input-wrapper input{
+    padding: 10px 20px 10px 5px;
+}
+
+.input-wrapper button{
+    padding: 10px 20px ;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
