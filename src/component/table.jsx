@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { users } from "./mock";
 import './table.css'
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 
 class Table extends Component{
     constructor(props){
@@ -11,12 +12,16 @@ class Table extends Component{
             job : '',
             status : '',
             age : '',
-            search: 'id'
+            search: 'id',
+            active: null,
         }
     }
     render(){
 
-
+        const onChange = (event) =>{
+            this.setState({ [event.target.name] : event.target.value})
+        }
+        // delete elemnt from table 
 
         const onDelete = (id) =>{
          let res = this.state.data.filter(val => val.id !== id)
@@ -24,6 +29,9 @@ class Table extends Component{
             data: res
          });
 }
+
+        // Filter by option and all together
+
         //  const onFilter = (e) => {
         //     let result = users.filter(val => val.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()) ||  val.job.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()) ||  val.status.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
         //     this.setState({
@@ -37,23 +45,14 @@ class Table extends Component{
             })
          };
 
-         const onOption =(e)=>{
-            
-            this.setState({
-                search : e.target.value
-            })
-            console.log(this.state.search);
-         }
+        //  search option 
+         const onOption =(e)=>{  this.setState({search : e.target.value})     }
 
-        const creatObj = (e)=>{
-            this.setState({   [e.target.name] : e.target.value
-            })
-            
-        }
+        //  creating element in object 
+         const creatObj = (e)=>{ this.setState({   [e.target.name] : e.target.value }) }
 
-
+        //  adding element to the table 
          const onAdd = () =>{
-
             let newUser = {
                 id : users.length + 1,
                 name : this.state.name,
@@ -72,6 +71,28 @@ class Table extends Component{
             }
          
          }
+
+        //  Editing element in the table
+
+        const onEdit = ({id, name, job, status, age}, isSave) =>{
+            if(isSave){
+                let res = this.state.data.map((value) =>
+                value.id === this.state.active.id  ? { ...value, name: this.state.name, status: this.state.status, age: this.state.age }
+                : value)
+
+                this.setState({ active: null, data: res });
+            }else{
+                this.setState({
+                    name: name,
+                    job: job,
+                    status: status,
+                    age: age,
+
+                    active: { id, name, status },
+                  });
+            }
+           
+        }
          
      
         return(
@@ -106,15 +127,23 @@ class Table extends Component{
                 <tbody>
                         
                         {this.state.data.length ?
-                        this.state.data.map((value, i) =>{
+                        this.state.data.map(({id, name, job, status, age}) =>{
                             return (
-                                <tr key={value.id}>
-                                <td >{value.id}</td>
-                                <td>{value.name}</td>
-                                <td>{value.job}</td>
-                                <td>{value.status}</td>
-                                <td>{value.age}</td>
-                                <td><button onClick={()=>onDelete(value.id)}>Delete</button> <button onClick={onAdd}>Edit</button></td>
+                                <tr key={id}>
+                                <td >{id}</td>
+                                <td>{
+                                this.state.active?.id === id ? <input onChange={onChange} name="name" className="on-edit" value={this.state.name} type="text" /> : name
+                                }</td>
+                                <td>{
+                                  this.state.active?.id === id ? <input onChange={onChange} name="job" className="on-edit" value={this.state.job} type="text" /> : job}</td>
+                                <td>{
+                                  this.state.active?.id === id ? <input onChange={onChange} name="status" className="on-edit" value={this.state.status} type="text" /> : status}</td>
+                                <td>{
+                                  this.state.active?.id === id ? <input onChange={onChange} name="age" className="on-edit" value={this.state.age} type="number" /> : age}</td>
+                                <td>
+                                    <button onClick={()=>onDelete(id)}>Delete</button>
+                                    <button onClick={() => onEdit({id, name, job, status, age}, this.state.active?.id === id)}> {this.state.active?.id === id ? 'Save' : 'Edit'}</button>
+                                </td>
                             </tr>
                             )
                             
