@@ -1,16 +1,16 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { users } from "./mock";
 import './table.css'
 
-class Table extends Component{
-    constructor(props){
+class Table extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-            data : users,
-            name : '',
-            job : '',
-            status : '',
-            age : '',
+            data: users,
+            name: '',
+            job: '',
+            status: '',
+            age: '',
             search: 'id',
             active: null,
             inputName: '',
@@ -19,153 +19,158 @@ class Table extends Component{
             inputAge: '',
         }
     }
-    render(){
+    render() {
 
-        const onChange = (event) =>{
-            this.setState({ [event.target.name] : event.target.value})
+        // Filter 
+
+        const select = (e) => this.setState({ search: e.target.value })
+        const search = (e) =>{
+          let res = users.filter((value) => `${value[this.state.search]}`.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+          this.setState({data : res})
         }
-        // delete elemnt from table 
+
+        // Delete 
 
         const onDelete = (id) =>{
-         let res = this.state.data.filter(val => val.id !== id)
-         this.setState({
-            data: res
-         });
-}
+            let result = this.state.data.filter(val => val.id !== id)
+            this.setState({ data : result })
+        }
 
-        // Filter by option and all together
+        // Add 
 
-        //  const onFilter = (e) => {
-        //     let result = users.filter(val => val.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()) ||  val.job.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()) ||  val.status.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
-        //     this.setState({
-        //         data : result
-        //     })
-        //  }
-         const onFilter = (e) => {
-            let result = users.filter(val => `${val[this.state.search]}`.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()) )
-            this.setState({
-                data : result
-            })
-         };
-
-        //  search option 
-         const onOption =(e)=>{  this.setState({search : e.target.value})     }
-
-        //  creating element in object 
-         const creatObj = (e)=>{ this.setState({  [e.target.name] : e.target.value }) }
-
-        //  adding element to the table 
-         const onAdd = () =>{
-            let newUser = {
+        const onAdd = () => {
+            let user = {
                 id : users.length + 1,
                 name : this.state.inputName,
-                job: this.state.inputJob,
-                status: this.state.inputStatus,
-                age : this.state.inputAge
+                job : this.state.inputJob,
+                status : this.state.inputStatus,
+                age : this.state.inputAge,
             }
-            if(newUser.name.length && newUser.job.length && newUser.status.length){
-                this.setState({
-                    data : [...this.state.data, newUser],
+            if(user.name.length && user.status.length && user.job&& user.age.length){
+                this.setState ({
+                    data : [...users, user],
                     inputName : '',
-                    inputJob: '',
-                    inputStatus: '',
-                    inputAge: ''
+                    inputJob : '',
+                    inputStatus : '',
+                    inputAge : '',
                 })
-            }
-         
-         }
-
-        //  Editing element in the table
-
-        const onEdit = ({id, name, job, status, age}, isSave) =>{
-            if(isSave){
-                let res = this.state.data.map((value) =>
-                value.id === this.state.active.id  ? { ...value, name: this.state.name, status: this.state.status, age: this.state.age }
-                : value)
-
-                this.setState({ active: null, data: res });
-            }else{
-                this.setState({
-                    name: name,
-                    job: job,
-                    status: status,
-                    age: age,
-
-                    active: { id, name, status },
-                  });
             }
            
         }
-         
-     
-        return(
 
+        const addUser = (e) =>{  this.setState({ [e.target.name] : e.target.value })}
+
+        // Edit 
+
+        const onEdit = ({id, name, job, status, age }, boolean) =>{
+            if (boolean){
+                let updated = this.state.data.map((value) => value.id === this.state.active?.id ? {...value, name: this.state.name, job: this.state.job, status: this.state.status, age: this.state.age} : value);
+
+                this.setState({
+                    data : updated,
+                    active : null
+                   
+                })
+
+            }else
+            {
+                this.setState({
+                    name: name, 
+                    status : status,
+                    job: job, 
+                    age : age,
+                    active : {id, name, job, status, age}
+                })
+            }
+            
+        }
+
+        const editMode = (e) =>{
+            this.setState({
+                [e.target.name] : e.target.value
+            })
+        }
+
+
+
+        return (
             <>
-            <div className="search-wrap">
+                <div className="search">
+                    <select onChange={select}>
 
-                <select onChange={onOption} >
-                    <option value="id">ID</option>
-                    <option value="name">Name</option>
-                    <option value="job">Job</option>
-                    <option value="status">Status</option>
-                    <option value="age">Age</option>
-                </select>
+                        <option value="id">Id</option>
+                        <option value="name">Name</option>
+                        <option value="job">Job</option>
+                        <option value="age">Age</option>
 
-            <input  className="search" type="text" name="filter"  placeholder="type to search ..." onChange={onFilter} />
-            </div>
-           
+                    </select>
+                    <input onChange={search} type="text" placeholder="Type in to search for..."/>
+                </div>
 
-            <table border={1} >
 
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>Status</th>
-                        <th>Age</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        
-                        {this.state.data.length ?
-                        this.state.data.map(({id, name, job, status, age}) =>{
-                            return (
-                                <tr key={id}>
-                                <td >{id}</td>
-                                <td>{
-                                this.state.active?.id === id ? <input onChange={onChange} name="name" className="on-edit" value={this.state.name} type="text" /> : name
-                                }</td>
-                                <td>{
-                                  this.state.active?.id === id ? <input onChange={onChange} name="job" className="on-edit" value={this.state.job} type="text" /> : job}</td>
-                                <td>{
-                                  this.state.active?.id === id ? <input onChange={onChange} name="status" className="on-edit" value={this.state.status} type="text" /> : status}</td>
-                                <td>{
-                                  this.state.active?.id === id ? <input onChange={onChange} name="age" className="on-edit" value={this.state.age} type="number" /> : age}</td>
-                                <td>
-                                    <button onClick={()=>onDelete(id)}>Delete</button>
-                                    <button onClick={() => onEdit({id, name, job, status, age}, this.state.active?.id === id)}> {this.state.active?.id === id ? 'Save' : 'Edit'}</button>
+                <table>
+                    <thead>
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Job</th>
+                            <th>Status</th>
+                            <th>Age</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        { this.state.data.length ?
+                        this.state.data.map(({ id, name, job, status, age }) => {
+
+                            return <tr key={id}>
+
+                                <td>{id}</td>
+                                <td> 
+                                    {this.state.active?.id === id ?
+                                     <input name="name" onChange={editMode} value={this.state.name} className="edit-input" type="text" autoComplete="off"/> 
+                                     : name} 
                                 </td>
-                            </tr>
-                            )
-                            
-                            
-                            
-                        }): <tr > <th colSpan={6}>No Data Found</th></tr>}
-            
-                </tbody>
-            </table>
-            
-            <div className="input-wrapper">
+                                <td>
+                                    {this.state.active?.id === id ? 
+                                    <input name="job" onChange={editMode} value={this.state.job} className="edit-input" type="text" autoComplete="off"/> 
+                                    : job} 
+                                </td>
+                                <td>
+                                    {this.state.active?.id === id ? 
+                                    <input name="status" onChange={editMode} value={this.state.status} className="edit-input" type="text" autoComplete="off"/> 
+                                    : status}     
+                                </td>
+                                <td>
+                                    {this.state.active?.id === id ? 
+                                    <input name="age" onChange={editMode} value={this.state.age} className="edit-input" type="number" autoComplete="off"/> 
+                                    : age} 
+                                </td>
+                                <td className="action-td">
 
-                <input value={this.state.inputName} autoComplete="off" type="text" placeholder="Type in Your name..." name="inputName" onChange={creatObj}/>
-                <input value={this.state.inputJob} autoComplete="off" type="text" placeholder="Type your occupation..." name="inputJob" onChange={creatObj}/>
-                <input value={this.state.inputStatus} autoComplete="off" type="text" placeholder="Type your Status..." name="inputStatus" onChange={creatObj}/>
-                <input value={this.state.inputAge} autoComplete="off" type="number" placeholder="What is your age..." name="inputAge" onChange={creatObj}/>
-                <button type="submit" onClick={onAdd}>Add</button>
-                
-            </div>
+                                    <button onClick={ ()=> onEdit ({id, name, job, status, age }, this.state.active?.id === id)} >
+                                        {this.state.active?.id === id ? 'Save' : 'Edit'}
+                                    </button>
+
+                                    <button onClick={ ()=> onDelete (id) }>Delete</button>
+                                </td>
+
+                            </tr>
+                        }): <tr ><th colSpan={6}  className="no-data">No Data Found</th></tr>}
+                    </tbody>
+                </table>
+
+                <div className="input-wrapper">
+                    <input onChange={addUser} value={this.state.inputName} name="inputName" type="text" placeholder=" Type in your Name" />
+                    <input onChange={addUser} value={this.state.inputJob} name="inputJob" type="text" placeholder=" Type in your Job" />
+                    <input onChange={addUser} value={this.state.inputStatus} name="inputStatus" type="text" placeholder=" Type in your Status" />
+                    <input onChange={addUser} value={this.state.inputAge} name="inputAge" type="number" placeholder=" Type in your Age" />
+                    <button onClick={onAdd}>Add Your User</button>
+
+
+                </div>
             </>
         )
     }
