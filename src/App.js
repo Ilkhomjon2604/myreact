@@ -8,14 +8,15 @@ display: flex;
 max-width: 1664px;
 width: 100%;
 flex-direction: column;
+background-color: black;
 
 `
 
 function App() {
   return (
-    <div className="App">
+    <Container>
       <Head/>
-    </div>
+    </Container>
   );
 }
 
