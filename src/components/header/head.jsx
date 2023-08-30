@@ -14,11 +14,11 @@ class Head extends  React.Component{
 
                 <LogoWrap>
                     <Icons.Burger/>
-                    <Icons.Logo src={logo}/>
+                    <a href="#" target='_blank'>  <Icons.Logo src={logo}/></a> 
                 </LogoWrap>
 
                 <Search>
-                    <Search.Input placeholder='Type for search ...' type= 'text'></Search.Input>
+                    <Search.Input  placeholder='Type for search ...' type= 'text'></Search.Input>
                     <Icons.Search/>
                 </Search>
 
