@@ -14,6 +14,7 @@ export const HeadWrap = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 12px;
+    padding-bottom: 32px;
     background-color: #222;
 `;
 
