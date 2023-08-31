@@ -14,6 +14,7 @@ export const HeadWrap = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 12px;
+    background-color: #222;
 `;
 
 export const LogoWrap = styled.div`
@@ -56,6 +57,7 @@ export const Icons = styled.div`
 Icons.Burger = styled(burger)`
     width: 24px;
     height: 24px;
+    cursor: pointer;
 `;
 Icons.Search = styled(searcher)`
     width: 83px;
@@ -66,10 +68,12 @@ border-bottom-right-radius: 25px;
 Icons.VideoAdd = styled(add)`
     width: 20px;
     height: 14px;
+    cursor: pointer;
 `;
 Icons.Notification = styled(noti)`
     width: 16px;
     height: 20px;
+    cursor: pointer;
 `;
 Icons.Logo = styled.img``
 Icons.User = styled.img`
@@ -78,3 +82,4 @@ height: 32px;
 border-radius: 50%;
 
 `
+
