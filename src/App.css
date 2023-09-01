@@ -14,3 +14,17 @@
   -o-transition: all .3s ease-in-out;
 }
 
+.filterBtn:hover , .activeBtn{
+  background-color: #fff !important;
+  color: #111 !important;
+}
+.rounded {
+  width: 25px;
+  height: 25px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  margin-top: 10px;
+}
