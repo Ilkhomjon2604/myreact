@@ -50,7 +50,7 @@ export const cards= [
     {type: 'IT', img : 'https://i.ytimg.com/vi_webp/SzJ46YA_RaA/hqdefault.webp', icon :'https://picsum.photos/id/65/200', title : 'Frontend amaliyot 17-kun.',   name : 'MohirDev', watched : '14.1K views - 10 days ago' },
     {type: 'News', img : 'https://picsum.photos/id/328/332/186', icon :'https://picsum.photos/id/65/200', title : 'Gaming will start with us ',   name : 'UzLeader', watched : '71K views - 35 days ago' },
     {type: 'Tech', img : 'https://picsum.photos/id/315/332/186', icon :'https://picsum.photos/id/65/200', title : 'Programming Fundamentals #1: Intro To Programming  ',   name : 'WBA', watched : '7.1K views - 10 days ago' },
-    {type: 'Game', img : 'https://i.ytimg.com/vi/Dqedo7UYNkc/mqdefault.jpg', icon :'https://picsum.photos/id/65/200', title : 'Ukrain Air Force Amy Just Accepted to but Turkish Dron',   name : 'SKY News', watched : '701K views - 2 Month ago' },
+    {type: 'News', img : 'https://i.ytimg.com/vi/Dqedo7UYNkc/mqdefault.jpg', icon :'https://picsum.photos/id/65/200', title : 'Ukrain Air Force Amy Just Accepted to but Turkish Dron',   name : 'SKY News', watched : '701K views - 2 Month ago' },
     {type: 'IT', img : 'https://i.ytimg.com/vi/f_mQCPr4elI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAijzAHFfENRDtnO0oWoMudWZQGVw', icon :'https://picsum.photos/id/65/200', title : 'Ask Me Anything (AMA), yangi setupni sinovdan otkazish',   name : 'MayoqUz', watched : '3M views - 1 Month ago' },
 
 ]

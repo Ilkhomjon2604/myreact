@@ -3,32 +3,37 @@ import { CardWrap, WrapGn, FilterBar, FilterBtn , Card} from './body';
 import { cards } from '../mock';
 
 class Body extends React.Component {
+    constructor(props){
+        super(props);
+            this.state = {
+                card : cards
+            
+        }
+    }
     render() {
 
-        this.state = {
-            card : cards
-        }
+       
 
         const Filter = (e)=>{
-            let res = this.state.card.filter(({type}) => e.target.dataset.filter == type)
+          
+            let res = cards.filter(({type}) => type === e.target.dataset.filter)
+
             this.setState({
                 card: res,
             })
+            // e.target.className = 'activeBtn'
         }
+
+        const FilterReset = () => this.setState({card : cards})
         
-        const onSearch = (e) =>{
-            let result = this.state.card.filter(value => value.name === e.target.value)
-            this.setState({
-                card : result
-            })
-        }
+      
           
         return (
 
             <WrapGn>
 
                 <FilterBar>
-                <FilterBtn onClick={Filter} className='filterBtn activeBtn'>All...</FilterBtn>
+                <FilterBtn onClick={FilterReset} className='filterBtn '>All...</FilterBtn>
                 <FilterBtn onClick={Filter}  data-filter = 'IT' className='filterBtn'>IT Tech</FilterBtn>
                 <FilterBtn onClick={Filter} data-filter = 'Game' className='filterBtn'>Games</FilterBtn>
                 <FilterBtn onClick={Filter} data-filter = 'Music' className='filterBtn'>Music</FilterBtn>

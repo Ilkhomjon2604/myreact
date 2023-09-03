@@ -1,11 +1,12 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-  
-.sidebar-item:hover , .active{
+
+.sidebar-item:hover,
+.active {
   background-color: #fffdfd60;
   transition: all .3s ease-in-out;
   -webkit-transition: all .3s ease-in-out;
@@ -14,10 +15,19 @@
   -o-transition: all .3s ease-in-out;
 }
 
-.filterBtn:hover , .activeBtn{
+.filterBtn:hover,
+.activeBtn {
   background-color: #fff !important;
   color: #111 !important;
+  padding: 8px 12px;
+  color: #fff;
+  background-color: #777;
+  border: 1px solid black;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
 }
+
 .rounded {
   width: 25px;
   height: 25px;
