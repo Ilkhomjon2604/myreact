@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css'
-import Head from './components/header/head';
 import Sidebar from './components/sidebar/sidebar';
 import Body from './components/body/cards';
 import styled from 'styled-components'
@@ -22,7 +21,7 @@ const BodyWrapper = styled.div`
 function App() {
   return (
     <Container>
-      <Head/>
+
       <BodyWrapper>
         <Sidebar/>
         <Body/>
