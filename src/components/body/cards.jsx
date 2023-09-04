@@ -5,10 +5,12 @@ import user from '../../assets/user.jpg'
 
 
 class Body extends React.Component {
+    
     constructor(props) {
         super(props);
         this.state = {
-            card: cards
+            card: cards,
+            search : ''
 
         }
     }
@@ -26,8 +28,21 @@ class Body extends React.Component {
             // e.target.className = 'activeBtn'
         }
 
-        const FilterReset = () => this.setState({ card: cards })
+        const inputVal = (e) =>{
+            let res = cards.filter(value => value.title.toLowerCase().includes(e.target.value.toLocaleLowerCase()))
+                     this.setState({
+                         card : res
+                     })
+        }
 
+    //    const searchIt = () =>{
+    //     let res = cards.filter(value => value.title.toLowerCase().includes(this.state.search.toLocaleLowerCase()))
+    //         this.setState({
+    //             card : res
+    //         })
+    //     }
+
+        const FilterReset = () => this.setState({ card: cards })
 
 
         return (
@@ -41,8 +56,8 @@ class Body extends React.Component {
                     <div></div>
 
                     <Search>
-                        <Search.Input placeholder='Type for search ...' type='text'></Search.Input>
-                        <Icons.Search />
+                        <Search.Input onChange={inputVal} placeholder='Type for search ...' type='text'></Search.Input>
+                        <Icons.Search  />
                     </Search>
 
                     <UserWrap>
