@@ -3,13 +3,3 @@
   padding: 0;
   box-sizing: border-box;
 }
-body{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 200px;
-}
-.btn:active {
-  transform: scale(.9);
-  box-shadow: 0 3px 15px -2px;
-}
