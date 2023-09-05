@@ -3,38 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-
-.sidebar-item:hover,
-.active {
-  background-color: #fffdfd60;
-  transition: all .3s ease-in-out;
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  -ms-transition: all .3s ease-in-out;
-  -o-transition: all .3s ease-in-out;
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px;
 }
-
-.filterBtn:hover,
-.activeBtn {
-  background-color: #fff !important;
-  color: #111 !important;
-  padding: 8px 12px;
-  color: #fff;
-  background-color: #777;
-  border: 1px solid black;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all .3s ease-in-out;
-}
-
-.rounded {
-  width: 25px;
-  height: 25px;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-  margin-top: 10px;
+.btn:active {
+  transform: scale(.9);
+  box-shadow: 0 3px 15px -2px;
 }
