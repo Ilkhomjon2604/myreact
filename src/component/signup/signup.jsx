@@ -6,7 +6,7 @@ import Linkedin from '../../assents/icons/linkedin.svg';
 
 export default function SignUp (props){
     return(
-        <Wrapper>
+        <Wrapper className="card">
         <Title>Sign Up </Title>
         <Lable>Name <br />
             <Input type="text" placeholder="Type your name..."  required/>

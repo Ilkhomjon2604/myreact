@@ -52,6 +52,7 @@ export const Or = styled.span`
  position: absolute;
  top: -15px;
  left: 45%;
+ color: #000;
 `
 
 export const IconWrap = styled.div`
