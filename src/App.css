@@ -3,3 +3,53 @@
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  font-family: 'Courier New', Courier, monospace;
+  background-color: aquamarine;
+}
+
+.main-wrap{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+.checkbox{
+  display: flex;
+  align-items: center;
+  width: 30%;
+  gap: 10px;
+}
+.checkbox span{
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.link{
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
+.or-wrap{
+  position: relative;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.btn{
+  background-color: rgb(254, 122, 144);
+  color: #fff;
+  border: none;
+}
+.btn:active{
+  transform: scale(1.01);
+  -webkit-transform: scale(1.01);
+  -moz-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  -o-transform: scale(1.01);
+}
+
+.info{
+  text-align: center;
+}
