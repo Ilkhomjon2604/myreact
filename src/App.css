@@ -6,61 +6,56 @@
 body{
   font-family: 'Courier New', Courier, monospace;
   background-color: #565555;
-}
-
-.main-wrap{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 100px;
-}
-.checkbox{
-  display: flex;
-  align-items: center;
-  width: 30%;
-  gap: 10px;
-}
-.checkbox span{
-  white-space: nowrap;
-  font-weight: 600;
-  font-size: 17px;
-}
-
-.link{
-  cursor: pointer;
-  text-decoration: underline;
-  color: blue;
-}
-.or-wrap{
-  position: relative;
-  width: 100%;
-  margin-bottom: 40px;
-}
-.btn{
-  background-color: rgb(254, 122, 144);
   color: #fff;
-  border: none;
-}
-.btn:active{
-  transform: scale(1.01);
-  -webkit-transform: scale(1.01);
-  -moz-transform: scale(1.01);
-  -ms-transform: scale(1.01);
-  -o-transform: scale(1.01);
 }
 
-.info{
-  text-align: center;
+
+
+.wrapper{
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.btn-theme{
+.active{
+  text-decoration: underline;
+}
+
+.navbar{
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 50px;
+  gap: 200px;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+ul{
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+li{
+  cursor: pointer;
+}
+
+button{
   padding: 10px 20px;
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
-  position: absolute;
-  top: 10px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  background-color: coral;
+  color: #fff;
+}
+
+.film-title{
+  margin: 10px 0;
 }
