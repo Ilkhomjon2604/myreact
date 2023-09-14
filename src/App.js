@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css'
-import Login from './component/login/login';
-import SignUp from './component/signup/signup';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 
@@ -25,16 +23,11 @@ body{
 `
 
 function App(){
-  const [active,  setActive] = useState(true)
-  const [light, setLight] = useState(true)
-  function changePage(value) {
-    setActive(value)
-  }
 
   const theme = {
-    bg : light ? 'aquamarine' : '#551b8c',
+    bg : light ? 'aquamarine' : '#333',
     cl : light ? 'black' : 'white',
-    crb : light ? 'white' : '#2f1b6b ',
+    crb : light ? 'white' : '#2f1b6b',
     crc : light ? 'black' : 'white',
     btb : light ? 'rgb(254, 122, 144)' : 'green',
    
@@ -48,7 +41,7 @@ function App(){
     <GlobalStyle/>
 
     <div className='main-wrap' >
-      {active ? <Login changePage={changePage}/> : <SignUp changePage={changePage}/>}
+
       <button onClick={onChange} className='btn btn-theme'> Theme</button>
     </div>
     </ThemeProvider>
