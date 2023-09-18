@@ -1,19 +1,11 @@
 import React from 'react';
 import './App.css'
-import { Nav } from './navbar/nav';
-
-
-
+import Table from './components/table';
 
 function App(){
-
-
+ 
   return (
-
-    <div className='main-wrap' >
-      <Nav/>
-    </div>
-   
+    <Table/>
   )
  
   
