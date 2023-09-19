@@ -1,27 +1,12 @@
 import React, { useState, useReducer } from "react";
 import { users } from "../mock";
 import './table.css'
+import { type } from "@testing-library/user-event/dist/type";
 
 
 
 function Table()  {
     const [search, setSearch] = useState('');
-    const [newUser, setNewUser] = useState({})
-   
-    const reducer = (state, action) =>{
-        switch(action.type)
-       { case 'Del':
-            return state.filter(val => val.id !== action.payload.id);
-        case  'Search':
-            return users.filter((value) => `${value[search]}`.toLocaleLowerCase().includes(action.payload.val.toLocaleLowerCase()));
-        case 'Add':
-            return state = [...state, newUser]
-        default: return state;}
-    }
-
-
-    const [data, dispatch] = useReducer(reducer, users);
-
     const [userName, setUserName] = useState('');
     const [userJob, setUserJob] = useState('');
     const [userStatus, setUserStatus] = useState('');
@@ -31,61 +16,54 @@ function Table()  {
     const [jobE, setJob] = useState('');
     const [statusE, setStatus] = useState('');
     const [ageE, setAge] = useState('');
-
-
-
-
-// Filter 
-   const select = (e) => setSearch( e.target.value )
-
-
-// Add
-    const onAdd = () => {
-        let user = {
-            id : users.length + 1,
-            name : userName,
-            job : userJob,
-            status : userStatus,
-            age : userAge 
-        };
-
-            if(user.name.length && user.status.length && user.job&& user.age.length){
-                setNewUser(user)
+   
+    const reducer = (state, action) =>{
+        switch(action.type)
+       { case 'Del':
+            return state.filter(val => val.id !== action.payload.id);
+        case  'Search':
+            return users.filter((value) => `${value[search]}`.toLocaleLowerCase().includes(action.payload.val.toLocaleLowerCase()));
+        case 'Add':
+            if(action.payload.name.length && action.payload.status.length && action.payload.job.length && action.payload.age.length){
                 setUserName('');
                 setUserStatus('');
                 setUserAge('');
                 setUserJob('');
-            };
-        }
-      
-// Update 
-
-const onEdit = ({id, name, job, status, age }, boolean) =>{
-        if (boolean){
-            let updated = data.map((value) => value.id === active?.id ? 
-            {...value, name: nameE, job: jobE, status: statusE, age: ageE} 
-            : value);
-
-            // setData(updated)
-            setActive(null)
-    
-                }else
-                {
-                    setName(name);
-                    setStatus(status)
-                    setJob(job)
-                    setAge(age)
-                    setActive({id, name, job, status, age})
-                }
-                
+                return  state = [...state, action.payload] 
+            }else{
+                return state
             }
-
+        case 'Update':
+            if (action.payload.boolen){
+               
+                setActive(null)
+                return state =  state.map((value) => value.id === active?.id ? 
+                {...value, name: nameE, job: jobE, status: statusE, age: ageE} 
+                : value);
+                
+        
+                    }else
+                    {
+                        setName(action.payload.upData.name);
+                        setStatus(action.payload.upData.status)
+                        setJob(action.payload.upData.job)
+                        setAge(action.payload.upData.age)
+                        setActive(action.payload.upData)
+                    }
+                    
+                
             
+         default: return state;}
+    }
+
+
+    const [data, dispatch] = useReducer(reducer, users);
+        
 
         return (
             <>
                 <div className="search">
-                    <select onChange={select}>
+                    <select onChange={(e)=> setSearch( e.target.value )}>
 
                         <option value="id">Id</option>
                         <option value="name">Name</option>
@@ -132,13 +110,13 @@ const onEdit = ({id, name, job, status, age }, boolean) =>{
                                      : age}  </td>
                                 <td className="action-td">
 
-                                <button onClick={ ()=> onEdit ({id, name, job, status, age }, active?.id === id)} >
+                                <button onClick={ ()=> dispatch( {type: 'Update', payload: {upData : {id, name, job, status, age}, boolen: active?.id === id }   })}>
                                         {active?.id === id ? 'Save' : 'Edit'}
                                 </button>
 
                                     <button onClick={()=> dispatch({type : 'Del', payload : {id : id}})}>Delete</button>
                                 </td>
-
+                                
                             </tr>
                         }): <tr ><th colSpan={6}  className="no-data">No Data Found</th></tr>}
                     </tbody>
@@ -150,7 +128,7 @@ const onEdit = ({id, name, job, status, age }, boolean) =>{
                     <input onChange={(e) =>{ setUserJob( e.target.value )}} value={userJob}  type="text" placeholder=" Type in your Job" />
                     <input onChange={(e) =>{ setUserStatus( e.target.value )}} value={userStatus} type="text" placeholder=" Type in your Status" />
                     <input onChange={(e) =>{ setUserAge( e.target.value )}} value={userAge} type="number" placeholder=" Type in your Age" />
-                    <button onClick={()=> dispatch({type:'Add', payload : { id : users.length + 1, name : userName, job : userJob, status : userStatus, age : userAge } })} >Add Your User</button>
+                    <button onClick={()=> dispatch({type:'Add', payload : {id : data.length + 1, name : userName, job : userJob, status : userStatus, age : userAge } })} >Add Your User</button>
 
 
                 </div>
